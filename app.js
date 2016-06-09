@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs =   require('hbs');
 var fs = require('fs');
+var db = require('./model/db');
 
 //var routes = require('./routes/index');
 var admin = require('./routes/admin');
@@ -24,8 +25,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 app.use('/', admin);
 //app.use('/admin', admin);
