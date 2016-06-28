@@ -19,7 +19,26 @@ filenames.forEach(function (filename) {
 
 /* GET Admin */
 router.get('/', function(req, res, next) {
-  res.render('admin/admin');
+	
+	// views/admin/admin.html
+	res.render('admin/admin');
 });
+
+router.get('/api/user', function(req, res, next) {
+
+	var db = req.db;
+	var collection = db.get('usercollection');
+
+    collection.find({},{},function(e,docs){
+
+    	// imprimi o conteudo do banco
+    	// console.log(docs);
+
+    	res.json({
+    		"user" : docs
+    	});
+    });
+});
+
 
 module.exports = router;
