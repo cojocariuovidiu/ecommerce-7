@@ -6,15 +6,26 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs =   require('hbs');
 var fs = require('fs');
+var app = express();
 
+var partialsDir = __dirname.replace("routes", "") + '/views/admin/partials';
+var filenames = fs.readdirSync(partialsDir);
+
+// Registra todas Partials html
+filenames.forEach(function (filename) {
+  var matches = /^([^.]+).html/.exec(filename);
+  if (!matches) {
+    return;
+  }
+  var name = matches[1];
+  var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+  hbs.registerPartial(name, template);
+});
+
+// bd
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('mongodb://localhost/ecommerce');
-
-//var routes = require('./routes/index');
-var admin = require('./routes/admin');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,8 +46,22 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use('/', admin);
-//app.use('/admin', admin);
+// Configuracao do passport, session
+var passport = require('passport');
+var session = require('express-session');
+app.use(session({
+    secret: 'key',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// configura a autenticacao
+// require('./auth/passport')(passport);
+
+// define as rotas
+require("./routes.js")(app, passport);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
@@ -44,7 +69,6 @@ app.use('/', admin);
 //   err.status = 404;
 //   next(err);
 // });
-
 // error handlers
 
 // development error handler

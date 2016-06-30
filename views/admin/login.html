@@ -1,0 +1,26 @@
+<html>
+	{{> head}}
+	<body>
+		<header>
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+		      <div class="container-fluid">
+		        <div class="navbar-header">
+		          <a class="navbar-brand" href="#">Portal e-Commerce</a>
+		        </div>
+		      </div>
+		    </nav>
+		</header>
+
+		<div class="container">
+			<form class="form-signin">
+				<h2 class="form-signin-heading">Login</h2>
+				<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required="" autofocus="">
+				<input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="">
+			
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+			</form>
+		</div>
+
+		{{> scripts}}
+	</body>	
+</html>
