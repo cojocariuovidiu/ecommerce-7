@@ -11,8 +11,10 @@
 		    </nav>
 		</header>
 
+		{{message}}
+
 		<div class="container">
-			<form class="form-signin">
+			<form class="form-signin" method="POST" action="/login">
 				<h2 class="form-signin-heading">Login</h2>
 				<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required="" autofocus="">
 				<input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="">

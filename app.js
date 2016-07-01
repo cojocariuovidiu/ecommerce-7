@@ -8,6 +8,11 @@ var hbs =   require('hbs');
 var fs = require('fs');
 var app = express();
 
+// bd
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/ecommerce');
+
 var partialsDir = __dirname.replace("routes", "") + '/views/admin/partials';
 var filenames = fs.readdirSync(partialsDir);
 
@@ -21,11 +26,6 @@ filenames.forEach(function (filename) {
   var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
   hbs.registerPartial(name, template);
 });
-
-// bd
-var mongo = require('mongodb');
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ecommerce');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,8 +51,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// configura a autenticacao
-//require('./auth/passport')(passport);
+// flash permite o passport enviar msg pra tpl
+var flash = require('connect-flash');
+app.use(flash());
+
+// configura do passport de autenticacao
+require('./auth/passport')(passport);
 
 // define as rotas
 require("./routes.js")(app, passport);

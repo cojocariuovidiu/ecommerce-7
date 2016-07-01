@@ -1,21 +1,16 @@
-var fs = require('fs');
-var hbs =   require('hbs');
 var express = require('express');
 var router = express.Router();
-var models = require('../models/collections');
+var Usuario = require('../models/usuario');
 
-/* GET Admin */
-router.get('/', function(req, res, next) {
+module.exports = function(isAuthenticated){
 
-
-	models.find({}, function(err, docs) {
+	/* GET Admin */
+	router.get('/', isAuthenticated, function(req, res) {
 		
-		console.log(docs);
-		
+		// views/admin/admin.html
+		res.render('admin/admin');
 	});
-	
-	// views/admin/admin.html
-	res.render('admin/admin');
-});
 
-module.exports = router;
+	return router;
+}
+// module.exports = router;
