@@ -9,6 +9,6 @@ module.exports = function( app, passport ) {
 	app.use('/admin', admin);
 
 	//apis
-	var api = require('./routes/api');
-	app.use('/api', api);
+	// var api = require('./routes/api');
+	// app.use('/api', api);
 }

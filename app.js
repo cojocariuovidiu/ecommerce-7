@@ -24,8 +24,8 @@ filenames.forEach(function (filename) {
 
 // bd
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('mongodb://localhost/ecommerce');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/ecommerce');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,12 +40,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
-
 // Configuracao do passport, session
 var passport = require('passport');
 var session = require('express-session');
@@ -58,7 +52,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // configura a autenticacao
-// require('./auth/passport')(passport);
+//require('./auth/passport')(passport);
 
 // define as rotas
 require("./routes.js")(app, passport);
