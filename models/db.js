@@ -1,6 +1,9 @@
 // Start server mongo
 // sudo chown -R `id -u` /data/db
 
+// Stop mongod
+//brew services stop mongodb
+
 // RUN bd
 // mongod
 

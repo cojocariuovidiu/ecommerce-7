@@ -2,14 +2,14 @@ var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	
-	res.redirect('/login');
+	res.redirect('/admin/login');
 }
 
 module.exports = function( app, passport ) {
 
 	// login
 	var login = require('./routes/login')(passport);
-	app.use('/login', login);
+	app.use('/admin/login', login);
 
 	//admin 
 	var admin = require('./routes/admin')(isAuthenticated);

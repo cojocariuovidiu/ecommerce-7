@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs =   require('hbs');
 var fs = require('fs');
+var passport = require('passport');
+var session = require('express-session');
+
 var app = express();
 
 // bd
@@ -40,9 +43,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configuracao do passport, session
-var passport = require('passport');
-var session = require('express-session');
+// Configuracao do passport
 app.use(session({
     secret: 'key',
     resave: false,
@@ -50,13 +51,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-// flash permite o passport enviar msg pra tpl
-var flash = require('connect-flash');
-app.use(flash());
-
-// configura do passport de autenticacao
-require('./auth/passport')(passport);
 
 // define as rotas
 require("./routes.js")(app, passport);

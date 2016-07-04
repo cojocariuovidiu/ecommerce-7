@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 	{{> head}}
-	<body>
+	<body id="login">
 		<header>
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 		      <div class="container-fluid">
@@ -11,18 +12,21 @@
 		    </nav>
 		</header>
 
-		{{message}}
+		<div class="alert alert-danger">
+		  <strong>Opa!</strong> Dados inválidos.
+		</div>
 
 		<div class="container">
-			<form class="form-signin" method="POST" action="/login">
+			<form class="form-signin" action="/admin/login" method="POST" novalidate>
 				<h2 class="form-signin-heading">Login</h2>
-				<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required="" autofocus="">
-				<input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="">
+				<input type="email" name="username" id="inputEmail" class="form-control" placeholder="E-mail" autofocus="">
+				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" >
 			
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+				<button class="btn btn-lg btn-primary btn-block" id="submit" type="submit">Entrar</button>
 			</form>
 		</div>
 
 		{{> scripts}}
+		<script src="/js/admin/login.js"></script>
 	</body>	
 </html>
