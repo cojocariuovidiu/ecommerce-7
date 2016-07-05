@@ -52,6 +52,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// permite passar msg do passport para o tpl
+var flash = require('connect-flash');
+app.use(flash());
+
 // define as rotas
 require("./routes.js")(app, passport);
 

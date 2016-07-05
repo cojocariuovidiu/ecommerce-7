@@ -12,12 +12,14 @@
 		    </nav>
 		</header>
 
+		{{#if error}}
 		<div class="alert alert-danger">
-		  <strong>Opa!</strong> Dados inválidos.
+		  <strong>Opa!</strong> {{error}}
 		</div>
+		{{/if}}
 
 		<div class="container">
-			<form class="form-signin" action="/admin/login" method="POST" novalidate>
+			<form id="login" class="form-signin" method="POST" novalidate>
 				<h2 class="form-signin-heading">Login</h2>
 				<input type="email" name="username" id="inputEmail" class="form-control" placeholder="E-mail" autofocus="">
 				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" >
@@ -27,6 +29,5 @@
 		</div>
 
 		{{> scripts}}
-		<script src="/js/admin/login.js"></script>
 	</body>	
 </html>

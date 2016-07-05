@@ -6,34 +6,30 @@ module.exports = function (passport) {
 	var Usuario = require('../models/usuario');
 	var LocalStrategy   = require('passport-local').Strategy;
 
-	/* GET login */
+	//GET login
 	router.get('/', function(req, res, next) {
 		// views/admin/admin.html
-		res.render('admin/login');
+		res.render('admin/login', { error: req.flash('error')});
 	});
 
 	//POST login
-	router.post('/', function(req, res, next) {
-		passport.authenticate('login', function (err, user, info) {
+	router.post('/', passport.authenticate('login', {
+		successRedirect: '/admin',
+		failureRedirect: '/admin/login',
+		failureFlash : true  
+	}));	
 
-			var ret = {
-				status: ""
-			}
-
-			if(user){
-				ret.status = true;
-			}else{
-				ret.status = false;
-			}
-
-			return res.json(ret);
-			
-		})(req, res, next);
-	});	
+	// LOGOUT
+	router.get('/logout', function(req, res) {
+		req.logout();
+		res.redirect('/admin/login');
+	});
 
     // passport login
-    passport.use('login', new LocalStrategy(
-        function(username, password, done) { 
+    passport.use('login', new LocalStrategy({
+    		passReqToCallback : true
+    	},
+        function(req, username, password, done) { 
 
             // verifica se tem usuario cadastrado
             Usuario.findOne({ 'email' :  username, 'senha' : password }, 
@@ -42,7 +38,7 @@ module.exports = function (passport) {
                         return done(err);
 
                     if (!user){
-                        return done(null, false);                 
+                        return done(null, false, req.flash('error', 'Dados inválidos.'));                 
                     }
 
                     // successo
@@ -51,6 +47,17 @@ module.exports = function (passport) {
             );
         }
     ));
+
+	// Passport needs to be able to serialize and deserialize users to support persistent login sessions
+    passport.serializeUser(function(user, done) {
+        done(null, user._id);
+    });
+
+    passport.deserializeUser(function(id, done) {
+        Usuario.findById(id, function(err, user) {
+            done(err, user);
+        });
+    });
 	
 	return router;
 }

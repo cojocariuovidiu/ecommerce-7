@@ -17,17 +17,7 @@ $(function(){
 	});
 
 	function submitLogin(){
-		$.ajax({
-			url: "/admin/login",
-			type: "POST",
-			data: $("form").serializeArray(),
-			success: function(data){
-
-				if(! data.status ){
-					$(".alert").show();
-				}
-			}
-		})
+		$("#login").submit();
 	}
 
 	// validate form
