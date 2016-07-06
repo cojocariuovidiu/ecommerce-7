@@ -7,15 +7,11 @@ var isAuthenticated = function (req, res, next) {
 
 module.exports = function( app, passport ) {
 
-	// login
-	var login = require('./routes/login')(passport);
-	app.use('/admin/login', login);
-
 	//admin 
-	var admin = require('./routes/admin')(isAuthenticated);
+	var admin = require('./routes/admin')(isAuthenticated, passport);
 	app.use('/admin', admin);
 
 	//apis privada
-	var api = require('./routes/api');
+	var api = require('./routes/api')(isAuthenticated);
 	app.use('/api', api);
 }

@@ -56,16 +56,18 @@ app.use(passport.session());
 var flash = require('connect-flash');
 app.use(flash());
 
+// define as estrategias do passport
+require("./auth.js")(passport);
+
 // define as rotas
 require("./routes.js")(app, passport);
 
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-// error handlers
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
 // development error handler
 // will print stacktrace

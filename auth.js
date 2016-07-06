@@ -3,27 +3,8 @@ module.exports = function (passport) {
 	var express = require('express');
 	var router = express.Router();   
 
-	var Usuario = require('../models/usuario');
+	var Usuario = require('./models/usuario');
 	var LocalStrategy   = require('passport-local').Strategy;
-
-	//GET login
-	router.get('/', function(req, res, next) {
-		// views/admin/admin.html
-		res.render('admin/login', { error: req.flash('error')});
-	});
-
-	//POST login
-	router.post('/', passport.authenticate('login', {
-		successRedirect: '/admin',
-		failureRedirect: '/admin/login',
-		failureFlash : true  
-	}));	
-
-	// LOGOUT
-	router.get('/logout', function(req, res) {
-		req.logout();
-		res.redirect('/admin/login');
-	});
 
     // passport login
     passport.use('login', new LocalStrategy({

@@ -1,24 +1,26 @@
 var express = require('express');
 var router = express.Router();
-//var models = require('../models/collections');
 
-/* APIs */
-router.get('/user', function(req, res, next) {
+module.exports = function(isAuthenticated){
 
-	res.json("")	;
+	/* APIs */
+	router.get('/user', function(req, res, next) {
 
-	// var db = req.db;
-	// var collection = db.get('usuario');
+		res.json("")	;
 
- //    collection.find({},{},function(e,docs){
+		// var db = req.db;
+		// var collection = db.get('usuario');
 
- //    	// imprimi o conteudo do banco
- //    	// console.log(docs);
+	 //    collection.find({},{},function(e,docs){
 
- //    	res.json({
- //    		"user" : docs
- //    	});
- //    });
-});
+	 //    	// imprimi o conteudo do banco
+	 //    	// console.log(docs);
 
-module.exports = router;
+	 //    	res.json({
+	 //    		"user" : docs
+	 //    	});
+	 //    });
+	});
+
+	return router;
+}

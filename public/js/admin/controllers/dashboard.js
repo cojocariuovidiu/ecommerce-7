@@ -18,8 +18,6 @@ var dashboardController = function($scope, $http, $stateParams){
         }).then(function (result) {
         	vm.users = result.data.user;
 
-        	console.log(vm.users);
-
         }, function(error){ });
     };
 
