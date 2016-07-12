@@ -13,11 +13,17 @@
                 controller: 'dashboardController',
                 controllerAs: 'dashboard',
             })
-            .state('usuario', {
-                url: '/usuario',
-                templateUrl: '/views/admin/usuario.html',
-                controller: 'usuarioController',
-                controllerAs: 'usuario',
+            .state('usuarios', {
+                url: '/usuarios',
+                templateUrl: '/views/admin/usuarios.html',
+                controller: 'usuariosController',
+                controllerAs: 'usuarios',
+            })
+            .state('usuario-form', {
+                url: '/usuario-form',
+                templateUrl: '/views/admin/usuario-form.html',
+                controller: 'usuarioFormController',
+                controllerAs: 'usuarioForm',
             })
             .state('clientes', {
                 url: '/clientes',
@@ -47,7 +53,8 @@
 
 	app.controller('dashboardController', dashboardController);
 	app.controller('bannersController', bannersController);
-	app.controller('usuarioController', usuarioController);
+	app.controller('usuariosController', usuariosController);
+    app.controller('usuarioFormController', usuarioFormController);
 	app.controller('clientesController', clientesController);
 	app.controller('categoriasController', categoriasController);
 	app.controller('produtosController', produtosController);

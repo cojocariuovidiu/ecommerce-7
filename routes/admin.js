@@ -7,8 +7,8 @@ module.exports = function(isAuthenticated, passport){
 	//GET home ADMIN
 	router.get('/', isAuthenticated, function(req, res) {
 
-		// views/admin/admin.html
-		res.render('admin/admin', { usuario: req.user });
+		// views/admin/index.html
+		res.render('admin/index', { usuario: req.user });
 	});
 
 	//GET login

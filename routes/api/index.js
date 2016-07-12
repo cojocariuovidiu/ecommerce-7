@@ -1,25 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var Usuario = require('../../models/usuario');
 
 module.exports = function(isAuthenticated){
 
 	/* APIs */
-	router.get('/user', function(req, res, next) {
 
-		res.json("")	;
+	//GET todos usuários Admin
+	router.get('/usuarios', isAuthenticated, function(req, res, next) {
 
-		// var db = req.db;
-		// var collection = db.get('usuario');
-
-	 //    collection.find({},{},function(e,docs){
-
-	 //    	// imprimi o conteudo do banco
-	 //    	// console.log(docs);
-
-	 //    	res.json({
-	 //    		"user" : docs
-	 //    	});
-	 //    });
+		// Usuarios amdin => tipo: 0
+		Usuario.find( {'tipo': 0}, function(err, docs){
+			res.json(docs);
+		});
 	});
 
 	return router;

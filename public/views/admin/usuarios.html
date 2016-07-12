@@ -1,0 +1,23 @@
+<h1 class="page-header">Usuários</h1>
+
+<div class="">
+	<button class="btn btn-primary ng-scope pull-right" type="button" ng-click="usuarios.goFormUsuario()">Novo</button>
+	<br clear="all" />
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Nome</th>
+	      <th>E-mail</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="usuario in usuarios.usuarios">
+	      <td>{{usuario.nome}}</td>
+	      <td>{{usuario.email}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
