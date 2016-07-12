@@ -2,6 +2,32 @@
 
 	var app = angular.module('ecommerce', ['ui.router']);
 
+    // Metodos globais
+    app.service('AppServices', function ($rootScope, $state) {
+        this.goBack = function(){
+            window.history.back();
+        }
+    });
+
+    // Diretivas
+    app.directive("formgroup", function(){
+        return {
+            restrict: "E",
+            transclude: true,
+            template:   "<div class='form-group has-error'>"+
+                            "<label for='{{lab}}' class='control-label'>{{lab}}</label>"+
+                            "<div ng-transclude></div>"+
+                        "</div>",
+            scope:{
+                "lab": "@"
+            },
+            link: function(scope, elem, att){
+
+            }
+        }
+    });
+
+    // Pagainas e Controllers
 	app.config(function($stateProvider, $urlRouterProvider){
 
 		$urlRouterProvider.otherwise('/');

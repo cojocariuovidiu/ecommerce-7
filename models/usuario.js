@@ -10,6 +10,5 @@ module.exports = mongoose.model('usuario',{
 	email: String,
 	senha: String,
 	telefone: Number,
-	celular: Number,
-	nascimento: String
+	celular: Number
 });

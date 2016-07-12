@@ -1,7 +1,42 @@
 <div>
-	<h1>Novo Usuário</h1>
-	<div class="form-group">
-	  <label for="nome">Nome:</label>
-	  <input type="text" class="form-control" id="nome">
-	</div>
+	<button type="button" class="btn btn-default" ng-click="usuarioForm.goBack()">Voltar</button>
+
+	<form name="usuarioForm.form" ng-submit="usuarioForm.salvar()" novalidate>
+
+		<h1>Novo Usuário</h1>
+
+		<div class="form-group">
+		  <label class="control-label" for="nome">Nome:</label>
+		  <input type="text" class="form-control" id="nome">
+	  	</div>
+
+	  	<formgroup lab="E-mail" scope="usuarioForm">
+			<input type="email" id="E-mail" class="form-control" ng-model="usuarioForm.usuario.email" required />
+			<span class="help-block" ng-show="usuarioForm.error">Ops! esse campo está errado</span>
+		</formgroup>
+
+	  	<div class="form-group">
+		  <label class="control-label" for="email">E-mail:</label>
+		  <input type="email" class="form-control" id="email">
+		</div>
+
+	  	<div class="form-group">
+		  <label class="control-label" for="senha">Senha:</label>
+		  <input type="password" class="form-control" id="senha">
+		</div>
+
+		<div class="row">
+			<div class="form-group col-xs-6">
+			  <label for="celular">Celular:</label>
+			  <input type="tel" class="form-control" id="celular">
+			</div>
+
+			<div class="form-group col-xs-6">
+			  <label for="telefone">Telefone:</label>
+			  <input type="tel" class="form-control" id="telefone">
+			</div>
+		</div>
+
+		<button class="btn btn-primary ng-scope pull-right" type="submit">Salvar</button>
+	</form>
 </div>
