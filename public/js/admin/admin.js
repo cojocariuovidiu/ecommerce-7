@@ -14,7 +14,7 @@
         return {
             restrict: "E",
             transclude: true,
-            template:   "<div class='form-group has-error'>"+
+            template:   "<div class='form-group' ng-class='{errorForm: has-error}'>"+
                             "<label for='{{lab}}' class='control-label'>{{lab}}</label>"+
                             "<div ng-transclude></div>"+
                         "</div>",
