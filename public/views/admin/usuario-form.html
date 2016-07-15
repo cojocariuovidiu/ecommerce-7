@@ -1,18 +1,22 @@
 <div>
-	<button type="button" class="btn btn-default" ng-click="usuarioForm.goBack()">Voltar</button>
+	<button type="button" class="btn btn-default" ng-click="form.goBack()">Voltar</button>
 
-	<form name="usuarioForm.form" ng-submit="usuarioForm.salvar()" novalidate>
+	<form name="form.form" ng-submit="form.salvar()" novalidate>
 
 		<h1>Novo Usuário</h1>
 
-		<div class="form-group" ng-class="{'has-error': errorForm}">
+		<div class="form-group" ng-class="{'has-error': submitted && form.form.nome.$error.required}">
 		  <label class="control-label" for="nome">Nome:</label>
-		  <input type="text" class="form-control" id="nome" required>
-		  <span class='help-block' ng-show='errorForm'>Ops! esse campo está errado</span>
+		  <input type="text" class="form-control" id="nome" name="nome" ng-model="form.usuario.nome" required>
+		  <span class='help-block' ng-show='submitted && form.form.nome.$error.required'>Ops! esse campo está errado</span>
 	  	</div>
 
+	  	<formgroup label="Nome" required="&& form.form.nome.$error.required">
+			<input type="text" class="form-control" id="nome" name="nome" ng-model="form.usuario.nome" required>
+		</formgroup>
+
 	  	<formgroup lab="E-mail">
-			<input type="email" id="E-mail" class="form-control" ng-model="usuarioForm.usuario.email" required />
+			<input type="email" id="E-mail" class="form-control" ng-model="form.usuario.email" required />
 			<span class='help-block' ng-show='errorForm'>Ops! esse campo está errado</span>
 		</formgroup>
 
@@ -33,6 +37,6 @@
 			</div>
 		</div>
 
-		<button class="btn btn-primary ng-scope pull-right" type="submit">Salvar</button>
+		<button class="btn btn-primary ng-scope pull-right" type="submit" ng-click="submitted=true">Salvar</button>
 	</form>
 </div>

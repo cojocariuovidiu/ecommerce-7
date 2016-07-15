@@ -15,7 +15,7 @@ module.exports = function(isAuthenticated, passport){
 	router.get('/login', function(req, res, next) {
 
 		// views/admin/admin.html
-		res.render('admin/login', { error: req.flash('error')});
+		res.render('admin/login', { erro: req.flash('erro')});
 	});
 
 	//POST login

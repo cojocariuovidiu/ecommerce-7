@@ -19,7 +19,7 @@ module.exports = function (passport) {
                         return done(err);
 
                     if (!user){
-                        return done(null, false, req.flash('error', 'Dados inválidos.'));                 
+                        return done(null, false, req.flash('erro', 'Dados inválidos.'));                 
                     }
 
                     // successo

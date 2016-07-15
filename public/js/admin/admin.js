@@ -14,12 +14,14 @@
         return {
             restrict: "E",
             transclude: true,
-            template:   "<div class='form-group' ng-class='{errorForm: has-error}'>"+
-                            "<label for='{{lab}}' class='control-label'>{{lab}}</label>"+
-                            "<div ng-transclude></div>"+
-                        "</div>",
+            template:   '<div class="form-group" ng-class="{\'has-error\': submitted {{required}} }">'+
+                            '<label for="{{name}}" class="control-label">{{label}}</label>'+
+                            '<div ng-transclude></div>'+
+                            '<span class="help-block" ng-show="submitted {{required}}">Ops! esse campo está errado</span>'+
+                        '</div>',
             scope:{
-                "lab": "@"
+                "label": "@",
+                "required": "@"
             },
             link: function(scope, elem, att){
 
@@ -49,7 +51,7 @@
                 url: '/usuario-form',
                 templateUrl: '/views/admin/usuario-form.html',
                 controller: 'usuarioFormController',
-                controllerAs: 'usuarioForm',
+                controllerAs: 'form',
             })
             .state('clientes', {
                 url: '/clientes',

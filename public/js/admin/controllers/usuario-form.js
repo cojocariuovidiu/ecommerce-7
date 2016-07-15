@@ -15,7 +15,7 @@ var usuarioFormController = function($scope, $http, $stateParams, AppServices){
 		}
 		else{
 			// Tem erros
-			$scope.errorForm = true;
+			//$scope.errorForm = true;
 		}
 	}
 
