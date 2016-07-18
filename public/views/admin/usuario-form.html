@@ -1,4 +1,11 @@
 <div>
+	<div class="alert alert-danger" ng-show="form.erro">
+	  <strong>Ops!</strong> <p>{{form.erro}}</p>
+	</div>
+	<div class="alert alert-success" ng-show="form.sucesso">
+	  <strong>Parabéns!</strong> <p>{{form.sucesso}}</p>
+	</div>	
+
 	<button type="button" class="btn btn-default" ng-click="form.goBack()">Voltar</button>
 
 	<form name="form.form" ng-submit="form.salvar()" novalidate>
@@ -11,29 +18,28 @@
 		  <span class='help-block' ng-show='submitted && form.form.nome.$error.required'>Ops! esse campo está errado</span>
 	  	</div>
 
-	  	<formgroup label="Nome" required="&& form.form.nome.$error.required">
-			<input type="text" class="form-control" id="nome" name="nome" ng-model="form.usuario.nome" required>
-		</formgroup>
+		<div class="form-group" ng-class="{'has-error': submitted && form.form.email.$error.required || form.form.email.$error.email}">
+		  <label class="control-label" for="email">E-mail:</label>
+		  <input type="text" class="form-control" id="email" name="email" ng-model="form.usuario.email" ng-disabled="form.edit" required>
+		  <span class='help-block' ng-show='submitted && form.form.email.$error.required'>Ops! esse campo está errado</span>
+		  <span class='help-block' ng-show='submitted && form.form.email.$error.email'>Ops! insira um e-mail válido</span>
+	  	</div>	  	
 
-	  	<formgroup lab="E-mail">
-			<input type="email" id="E-mail" class="form-control" ng-model="form.usuario.email" required />
-			<span class='help-block' ng-show='errorForm'>Ops! esse campo está errado</span>
-		</formgroup>
-
-	  	<div class="form-group">
+	  	<div class="form-group" ng-class="{'has-error': submitted && form.form.senha.$error.required}">
 		  <label class="control-label" for="senha">Senha:</label>
-		  <input type="password" class="form-control" id="senha">
+		  <input type="password" class="form-control" id="senha" name="senha" ng-model="form.usuario.senha" required>
+		  <span class='help-block' ng-show='submitted && form.form.senha.$error.required'>Ops! esse campo está errado</span>
 		</div>
 
 		<div class="row">
 			<div class="form-group col-xs-6">
 			  <label for="celular">Celular:</label>
-			  <input type="tel" class="form-control" id="celular">
+			  <input type="tel" class="form-control" id="celular" name="celular" ng-model="form.usuario.celular">
 			</div>
 
 			<div class="form-group col-xs-6">
 			  <label for="telefone">Telefone:</label>
-			  <input type="tel" class="form-control" id="telefone">
+			  <input type="tel" class="form-control" id="telefone" name-"telefone" ng-model="form.usuario.telefone">
 			</div>
 		</div>
 

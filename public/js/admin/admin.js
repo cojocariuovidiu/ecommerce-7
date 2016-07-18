@@ -9,23 +9,14 @@
         }
     });
 
-    // Diretivas
-    app.directive("formgroup", function(){
-        return {
-            restrict: "E",
+    app.directive("modal", function(){
+        return{
+            restrict: 'E',
             transclude: true,
-            template:   '<div class="form-group" ng-class="{\'has-error\': submitted {{required}} }">'+
-                            '<label for="{{name}}" class="control-label">{{label}}</label>'+
-                            '<div ng-transclude></div>'+
-                            '<span class="help-block" ng-show="submitted {{required}}">Ops! esse campo está errado</span>'+
-                        '</div>',
             scope:{
-                "label": "@",
-                "required": "@"
+                menssagem: "@"
             },
-            link: function(scope, elem, att){
-
-            }
+            templateUrl: "/views/directives/modal.html"
         }
     });
 
@@ -52,6 +43,9 @@
                 templateUrl: '/views/admin/usuario-form.html',
                 controller: 'usuarioFormController',
                 controllerAs: 'form',
+                params:{
+                    usuario: null
+                }
             })
             .state('clientes', {
                 url: '/clientes',

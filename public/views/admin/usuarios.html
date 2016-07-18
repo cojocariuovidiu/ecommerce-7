@@ -1,8 +1,8 @@
 <h1 class="page-header">Usuários</h1>
 
-<div class="">
+<div style="margin-bottom: 10px;">
 	<button class="btn btn-primary ng-scope pull-right" type="button" ng-click="usuarios.goFormUsuario()">Novo</button>
-	<br clear="all" />
+	<div class="clearfix"></div>
 </div>
 
 <div class="table-responsive">
@@ -11,13 +11,28 @@
 	    <tr>
 	      <th>Nome</th>
 	      <th>E-mail</th>
+	      <th width="70"></th>
+	      <th width="50"></th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr ng-repeat="usuario in usuarios.usuarios">
-	      <td>{{usuario.nome}}</td>
+      	  <td>{{usuario.nome}}</td>
 	      <td>{{usuario.email}}</td>
+	      <td>
+  			<button type="button" class="btn btn-default" ng-click="usuarios.goFormUsuario( usuario )">
+			  <span class="glyphicon glyphicon-pencil"></span>
+			</button>
+		  </td>
+	      <td>
+			  <a class="glyphicon glyphicon-remove" data-toggle="modal" ng-click="usuarios.setUsuario( usuario )" data-target="#alert-remove"></a>
+		  </td>		  
 	    </tr>
 	  </tbody>
 	</table>
 </div>
+
+
+<modal menssagem="Tem certeza que deixar remover {{usuarios.usuario.nome}}?">
+	<button type="button" class="btn btn-danger" ng-click="usuarios.removeUsuario()" data-dismiss="modal">Remover</button>
+</modal>
