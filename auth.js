@@ -1,7 +1,8 @@
-module.exports = function (passport) {   
+module.exports = function () {   
 
-	var express = require('express');
-	var router = express.Router();   
+    var auth = {};
+
+    var passport = require('passport');
 
 	var Usuario = require('./models/usuario');
 	var LocalStrategy   = require('passport-local').Strategy;
@@ -39,6 +40,17 @@ module.exports = function (passport) {
             done(err, user);
         });
     });
+
+    // function isAuthenticated
+    auth.isAuthenticated = function (req, res, next) {
+      if (req.isAuthenticated())
+      return next();
+
+      res.redirect('/admin/login');
+    }
+
+    // passport
+    auth.passport = passport;
 	
-	return router;
+	return auth;
 }

@@ -8,6 +8,7 @@ var hbs =   require('hbs');
 var fs = require('fs');
 var passport = require('passport');
 var session = require('express-session');
+var load = require('express-load');
 
 var app = express();
 
@@ -57,10 +58,17 @@ var flash = require('connect-flash');
 app.use(flash());
 
 // define as estrategias do passport
-require("./auth.js")(passport);
+//require('./auth.js')(passport);
 
 // define as rotas
-require("./routes.js")(app, passport);
+//require('./routes.js')(app, passport);
+//require('./routes/admin/home.js')(app);
+
+// carrega MVC
+load('auth.js')
+  .then('controllers')
+  .then('routes')
+  .into(app)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

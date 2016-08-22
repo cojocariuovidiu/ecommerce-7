@@ -2,9 +2,9 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('categoria',{
-	ordem: int,
+	ordem: Number,
 	status: {
-		type: int,
+		type: Number,
 		default: 1 // 0 => Inativo, 1 => Ativo
 	}, 
 	nome: String,

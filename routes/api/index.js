@@ -1,87 +1,20 @@
-var express = require('express');
-var router = express.Router();
-var Usuario = require('../../models/usuario');
+// var express = require('express');
+// var router  = express.Router();
+// var fs      = require("fs");
+// var path    = require("path");
 
-module.exports = function(isAuthenticated){
+// module.exports = function(isAuthenticated){
 
-	// Variaveis de retorno
-	var erro = { resp: false, msg: '' }
-	var sucesso = { resp: true, msg: '' }
+// 	// percorre o diretorio para carregar cada api
+// 	fs.readdirSync(__dirname)
+		
+// 		.filter(function(file) {
+// 			return (file.indexOf(".") !== 0) && (file !== "index.js");
+// 		})
+		
+// 		.forEach(function(file) {
+// 			require(__dirname +"/"+file)( router, isAuthenticated);
+// 		});
 
-	/* APIs */
-
-	//GET todos usuários Admin
-	router.get('/usuarios', isAuthenticated, function(req, res, next) {
-
-		// Usuarios amdin => tipo: 0
-		Usuario.find( {'tipo': 0}, function(err, docs){
-			res.json(docs);
-		});
-	});
-
-	//POST salva novo usuario
-	router.post('/adiciona-usuario', isAuthenticated, function(req, res, next){
-		// Usuario
-		var usuario = req.body;
-
-		// Nao salva usuario com email repetido
-		Usuario.find( {'email': usuario.email}, function(err, docs){
-			// Ja existe usuario
-			if( docs.length > 0 ){
-				erro.msg = "Esse e-mail já está sendo usado";
-				res.json(erro);
-			}else{
-				// Cadastra usuario admin
-				usuario.tipo = 0;
-
-				Usuario.create(usuario, function(err, attr){
-					if(! err ){
-						sucesso.msg = "Usuário cadastrado com sucesso";
-						res.json(sucesso);
-					}else{
-						erro.erro = err;
-						res.json(err);
-					}
-				});
-			}
-		});
-	});
-
-	//POST atualiza dados usuario
-	router.post('/edita-usuario', isAuthenticated, function(req, res, next){
-		// Usuario
-		var usuario = req.body;
-
-		// Nao salva usuario com email repetido
-		Usuario.findOneAndUpdate( {'email': usuario.email}, {$set: usuario},function(err, docs){
-			// Ja existe usuario
-			if(! err ) {
-				sucesso.msg = "Usuário atualizado com sucesso";
-				res.json(sucesso);
-			}else{
-				erro.erro = err;
-				res.json(erro);
-			}
-		});
-	});
-
-	//POST remove usuario
-	router.post('/remove-usuario', isAuthenticated, function(req, res, next){
-		// Usuario
-		var usuario = req.body;
-
-		Usuario.remove( {email: usuario.email}, function(err, docs){
-			if(! err){
-				res.json(sucesso);
-			}else{
-				erro.erro = err;
-				res.json(erro);
-			}
-		});
-	});
-
-	return router;
-}
-
-
-
+// 	return router;
+// }

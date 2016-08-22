@@ -1,1 +1,62 @@
+<div class="alert alert-danger" ng-show="categorias.erro">
+  <strong>Ops!</strong> <span>{{categorias.erro}}</span>
+</div>
+<div class="alert alert-success" ng-show="categorias.sucesso">
+  <p>{{categorias.sucesso}}</p>
+</div>	
+
 <h1 class="page-header">Categorias</h1>
+
+<div style="margin-bottom: 20px;">
+	<button class="btn btn-primary ng-scope pull-right" type="button" ng-click="toogleForm = !toogleForm">Novo</button>
+	<div class="clearfix"></div>
+</div>
+
+<div class="well" ng-show="toogleForm">
+	<form name="categorias.form" ng-submit="categorias.salvar()" novalidate>
+		<div class="form-group" ng-class="{'has-error': submitted && categorias.form.categoria.$error.required}">
+			<label class="control-label" for="categoria">Categoria:</label>
+			<input type="text" class="form-control" id="categoria" name="categoria" ng-model="categorias.categoria.nome" required>
+			<span class='help-block' ng-show='submitted && categorias.form.categoria.$error.required'>Ops! esse campo está errado</span>
+		</div>
+		<button class="btn btn-primary ng-scope pull-right" type="submit" ng-click="submitted=true">Salvar</button>
+		<button type="btn" class="btn btn-default pull-right" style="margin-right:15px" ng-click="toogleForm = false">Cancelar</button>		
+		<div class="clearfix"></div>
+	</form>
+</div>
+
+<div class="table-responsive" ng-show="categorias.categorias.length > 0">
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Nome</th>
+	      <th width="60"></th>	
+	      <th width="35"></th>
+	    </tr>
+	  </thead>
+	  <tbody ng-repeat="categoria in categorias.categorias">
+	    <tr>
+      	  <td ng-hide="categoria.edit">{{categoria.nome}}</td>
+      	  <td ng-show="categoria.edit"><input type="text" class="form-control" value="{{categoria.nome}}"></td>
+	      <td>
+  			<button type="button" class="btn btn-default" ng-click="categoria.edit = !categoria.edit">
+			  <span class="glyphicon glyphicon-pencil"></span>
+			</button>
+		  </td>      	  
+      	  <td>
+			  <a class="glyphicon glyphicon-remove" data-toggle="modal" ng-click="categorias.setCategoria( categoria )" data-target="#alert-remove"></a>
+		  </td>
+	    </tr>
+	    <tr ng-show="categoria.edit">
+	    	<td colspan="3">
+	    		<button class="btn btn-primary ng-scope pull-right" type="submit" ng-click="categoria.edit=false">Salvar</button>
+				<button type="btn" class="btn btn-default pull-right" style="margin-right:15px" ng-click="categoria.edit=false">Cancelar</button>		
+	    	</td>
+    	</tr>
+	  </tbody>
+	</table>
+</div>
+
+<modal menssagem="Tem certeza que deixar remover {{categorias.categoria.nome}}?">
+	<button type="button" class="btn btn-danger" ng-click="categorias.removeCategoria()" data-dismiss="modal">Remover</button>
+</modal>
